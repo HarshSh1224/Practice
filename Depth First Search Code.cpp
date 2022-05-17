@@ -10,12 +10,10 @@ void dfs(int vertex){
     /*Take action on vertex after entering the vertex*/
 
     vis[vertex] = true;
-    cout<<vertex<<endl;
     for(auto child: graph[vertex]){
     
     /*Take action on child before entering the child node*/
 
-        cout<<vertex<<" "<<child<<endl;
         if(vis[child]) continue;
         dfs(child);
 
