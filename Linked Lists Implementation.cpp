@@ -1,6 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+//    CLASS NODE    //
+
+
 class node
 {  
 public:
@@ -11,6 +15,12 @@ public:
         next = NULL;
     }
 };
+
+
+
+//   INSERTION    //
+
+
 
 void insertAtTail(node* &head, int val){
     node* n = new node(val);
@@ -35,6 +45,16 @@ void insertAtHead(node* &head, int val){
     head = n;
 }
 
+
+
+
+
+//      SEARCHING FOR A VALUE      //
+
+
+
+
+
 bool search(node* head, int val){
     while(head!= NULL){
         if(head->data == val) return true;
@@ -43,6 +63,15 @@ bool search(node* head, int val){
     return false;
 }
 
+
+
+
+//      DISPLAY ENTIRE LL       //
+
+
+
+
+
 void display(node* head){
     while(head!=NULL){
         cout<<head->data<<" ";
@@ -50,6 +79,13 @@ void display(node* head){
     }
     cout<<endl;
 }
+
+
+
+//      DELETE A NODE          //
+
+
+
 
 void Delete(node* &head, int val){
 
@@ -76,6 +112,14 @@ void Delete(node* &head, int val){
     }
 }
 
+
+
+
+//      REVERSE THE LL COMPLETELY     //
+
+
+
+
 node* reverse(node* &head){
     node* previous = NULL;
     node* current = head;
@@ -94,6 +138,14 @@ node* reverse(node* &head){
 
     return head;
 }
+
+
+
+
+//      REVERSE K NODES IN A LL     //
+
+
+
 
 node* reversek(node* head, int k){
 
@@ -118,10 +170,93 @@ node* reversek(node* head, int k){
     return previous;
 }
 
+
+
+
+
+//      CREATE CYCLE AT (pos)th POSITION    //
+
+
+
+
+void createCycle(node* head, int pos){
+    node* temp = head;
+    node* startnode;
+    int count = 1;
+
+    while(temp->next != NULL){
+
+        if(count == pos){
+            startnode = temp;
+        }
+
+        temp = temp->next;
+        count++;
+    }
+
+    temp->next = startnode;
+}
+
+
+
+//      Detect Cycle in a LL      //
+
+
+
+bool detectCycle(node* head){
+    node* fast = head;
+    node* slow = head;
+
+    while(fast->next != NULL && fast!= NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast) return false;
+    }
+
+    return true;
+}
+
+
+
+
+//      Remove Cycle from a LL    //
+
+
+
+
+void removeCycle(node* head){
+
+    // we are assuming the the cycle IS present in the node
+
+    node* fast = head;
+    node* slow = head;
+
+    while(fast->next != NULL && fast!=NULL){
+        fast = fast->next->next;
+        slow = slow->next;
+
+        if(fast == slow){
+            break;
+        }
+    }
+
+    fast = head;
+
+    do{
+        fast = fast->next;
+        slow = slow->next;
+    }while(fast->next != slow->next);
+
+    slow->next = NULL;
+
+}
+
+
+
+
 int main(){
-
     
-
     node* head = NULL;
 
     insertAtTail(head, 1);
@@ -143,7 +278,11 @@ int main(){
     // node* newhead = reverse(head);
     // display(newhead);
 
+    
+
     // node* newhead2 = reversek(head, 3);
 
-    // display(newhead2);
+    display(newhead2);
+ 
+    return 0;
 }
